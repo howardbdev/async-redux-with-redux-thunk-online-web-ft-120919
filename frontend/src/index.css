@@ -20,7 +20,7 @@ code {
   flex-wrap: wrap;
 }
 
-.MainContainer {
+.MainContainer, .NavBar {
   justify-content: center;
   align-items: center;
   display: flex;
@@ -58,13 +58,15 @@ a:hover {
   color: green;
 }
 
-button {
+button, .NavBar > a {
   box-shadow: 1px 1px lightsteelblue;
   border-radius: 4px;
   border-color: navy;
   border-style: solid;
+  border-width: 1px;
   margin: 10px;
   padding: 5px;
+  text-decoration: none;
 }
 
 button:hover {
