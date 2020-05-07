@@ -1,11 +1,12 @@
 import React from 'react'
-import Car from './Car.js'
-import SideBar from './SideBar.js'
-import NewCar from './NewCar.js'
-import NewReview from './NewReview.js'
+import Car from '../components/Car.js'
+import SideBar from '../components/SideBar.js'
+import NewCar from '../components/NewCar.js'
+import NewReview from '../components/NewReview.js'
 
 class MainContainer extends React.Component {
   componentToRender = () => {
+    console.log("props", this.props)
     switch (this.props.currentView) {
       case "newCar":
         return <NewCar createCar={this.props.createCar}/>

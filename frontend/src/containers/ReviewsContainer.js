@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Review from './Review.js'
-import Reviews from "./Reviews.js"
-import NewReview from './NewReview.js'
-import NewReviewWithHooks from './NewReviewWithHooks.js'
+import Review from '../components/Review.js'
+import NewReview from '../components/NewReview.js'
 
 class ReviewsContainer extends Component {
   state = {
@@ -68,15 +66,12 @@ class ReviewsContainer extends Component {
     return (
       <div className="ReviewsContainer">
       <button
-        onClick={() => this.setState({reviewId: (Math.floor(Math.random() * dealerReviews.length))})}
+        onClick={() => this.setState({reviewId: (Math.floor(Math.random() * this.state.dealerReviews.length))})}
       >
         Click to Show Random Review
       </button>
 
       {this.state.reviewId ? <Review review={this.state.dealerReviews.find(review => review.id === this.state.reviewId)} /> : ""}
-
-        <h3>With Hooks</h3>
-        <NewReviewWithHooks createReview={this.createReview}/>
 
         <h3>No Hooks</h3>
         <NewReview createReview={this.createReview}/>
