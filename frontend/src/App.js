@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import Review from './components/Review.js'
 import SideBar from './components/SideBar.js'
-import MainContainer from './components/MainContainer.js'
-import ReviewsContainerWithHooks from './components/ReviewsContainerWithHooks.js'
+import MainContainer from './containers/MainContainer.js'
+import ReviewsContainerWithHooks from './containers/ReviewsContainerWithHooks.js'
 
 class App extends React.Component {
 

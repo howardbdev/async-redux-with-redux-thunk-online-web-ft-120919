@@ -6,7 +6,6 @@ import NewReviewWithHooks from './NewReviewWithHooks.js'
 
 class ReviewsContainer extends Component {
   state = {
-    interval: 0,
     dealerReviews: [],
     reviewId: 0,
     reviewsOn: true
@@ -14,7 +13,6 @@ class ReviewsContainer extends Component {
 
   componentDidMount() {
     this.getDealerReviews()
-    this.startInterval()
   }
 
   getDealerReviews = () => {
@@ -36,19 +34,10 @@ class ReviewsContainer extends Component {
     })
   }
 
-  startInterval = () => {
-    this.state.interval && this.stopInterval() // ensure to kill current interval if there is one before starting another..
-     this.setState({
-       interval: setInterval(this.setReview, 3000)
-     })
-  }
-
   handleReviewsButtonClick = () => {
     this.state.reviewsOn ? this.stopInterval() : this.startInterval()
     this.setState({reviewsOn: !this.state.reviewsOn})
   }
-
-  stopInterval = () => clearInterval(this.state.interval)
 
   createReview = (reviewData) => {
     const body = {
@@ -78,16 +67,13 @@ class ReviewsContainer extends Component {
   render() {
     return (
       <div className="ReviewsContainer">
-        <button
-          onClick={this.handleReviewsButtonClick}>{this.state.reviewsOn
-            ? "Hide Reviews"
-            : "Show Reviews Slideshow"}
-         </button>
+      <button
+        onClick={() => this.setState({reviewId: (Math.floor(Math.random() * dealerReviews.length))})}
+      >
+        Click to Show Random Review
+      </button>
 
-        {this.state.reviewsOn && <Reviews
-          stopInterval={this.stopInterval}
-          review={this.state.dealerReviews.find(review => review.id === this.state.reviewId)}
-        />}
+      {this.state.reviewId ? <Review review={this.state.dealerReviews.find(review => review.id === this.state.reviewId)} /> : ""}
 
         <h3>With Hooks</h3>
         <NewReviewWithHooks createReview={this.createReview}/>
