@@ -17,19 +17,19 @@
     used: [true, false].sample
   })
 end
-# 
-# plays = [
-#   :hamlet_quote,
-#   :as_you_like_it_quote,
-#   :king_richard_iii_quote,
-#   :romeo_and_juliet_quote
-# ]
-#
-# plays.each do |play|
-#   10.times do
-#     DealerReview.create({
-#       rating: [1,2,3,4,5].sample,
-#       content: Faker::Quotes::Shakespeare.send(play)
-#     })
-#   end
-# end
+
+plays = [
+  :hamlet_quote,
+  :as_you_like_it_quote,
+  :king_richard_iii_quote,
+  :romeo_and_juliet_quote
+]
+
+plays.each do |play|
+  10.times do
+    DealerReview.create({
+      rating: [1,2,3,4,5].sample,
+      content: Faker::Quotes::Shakespeare.send(play)
+    })
+  end
+end
