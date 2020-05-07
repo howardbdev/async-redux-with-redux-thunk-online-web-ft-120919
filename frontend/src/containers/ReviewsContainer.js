@@ -65,15 +65,14 @@ class ReviewsContainer extends Component {
   render() {
     return (
       <div className="ReviewsContainer">
-      <button
-        onClick={() => this.setState({reviewId: (Math.floor(Math.random() * this.state.dealerReviews.length))})}
-      >
-        Click to Show Random Review
-      </button>
+        <button
+          onClick={() => this.setState({reviewId: (Math.floor(Math.random() * this.state.dealerReviews.length))})}
+        >
+          Click to Show Random Review
+        </button>
 
-      {this.state.reviewId ? <Review review={this.state.dealerReviews.find(review => review.id === this.state.reviewId)} /> : ""}
+        {this.state.reviewId ? <Review review={this.state.dealerReviews.find(review => review.id === this.state.reviewId)} /> : ""}
 
-        <h3>No Hooks</h3>
         <NewReview createReview={this.createReview}/>
 
       </div>
