@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
+import NavBar from './components/NavBar.js'
 import Review from './components/Review.js'
 import SideBar from './components/SideBar.js'
+import NewCar from './components/NewCar.js'
 import MainContainer from './containers/MainContainer.js'
 import ReviewsContainer from './containers/ReviewsContainer.js'
+import { Switch, Route } from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -69,16 +72,21 @@ class App extends React.Component {
 
       <div className="App">
         <h1>🚗 React Cars 🚙</h1>
-        <MainContainer
-          currentView={this.state.currentView}
-          cars={this.state.cars}
-          carId={this.state.currentCarId}
-          handleCarLinkClick={this.handleCarLinkClick}
-          newCarClick={this.newCarClick}
-          createCar={this.createCar}
-        />
+        <NavBar />
+        <Switch>
+          <Route exact path="/cars" render={(routerProps) =>(
+            <MainContainer
+             {...routerProps}
+             cars={this.state.cars}
+             carId={this.state.currentCarId}
+             handleCarLinkClick={this.handleCarLinkClick}
+             newCarClick={this.newCarClick}
+            />)
+          }/>
+          <Route exact path="/cars/new" component={NewCar}/>
+          <Route exact path="/reviews" component={ReviewsContainer}/>
+        </Switch>
 
-        <ReviewsContainer />
       </div>
 
     );
