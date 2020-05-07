@@ -3,18 +3,16 @@ import './App.css';
 import Review from './components/Review.js'
 import SideBar from './components/SideBar.js'
 import MainContainer from './containers/MainContainer.js'
-import ReviewsContainerWithHooks from './containers/ReviewsContainerWithHooks.js'
+import ReviewsContainer from './containers/ReviewsContainer.js'
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      cars: [],
-      currentCarId: 0,
-      currentView: "cars",
-    }
+  state = {
+    cars: [],
+    currentCarId: 0,
+    currentView: "cars",
   }
+
 
   componentDidMount() {
     this.getCars()
@@ -80,7 +78,7 @@ class App extends React.Component {
           createCar={this.createCar}
         />
 
-        <ReviewsContainerWithHooks />
+        <ReviewsContainer />
       </div>
 
     );
