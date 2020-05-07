@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { createReview } from '../actions/reviews.js'
 
 class NewReview extends Component {
 
@@ -49,4 +51,4 @@ class NewReview extends Component {
   }
 }
 
-export default NewReview;
+export default connect(null, { createReview })(NewReview);

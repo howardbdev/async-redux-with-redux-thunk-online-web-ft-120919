@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addCar } from "../actions/cars.js"
+import { createCar } from "../actions/cars.js"
 import { connect } from "react-redux"
 
 const initialState = {
@@ -25,38 +25,12 @@ class NewCar extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.createCar()
+    this.props.createCar(this.state, this.props.history)
       .then(response => {
         if (!response.error) {
           this.resetForm()
-        } 
-      })
-  }
-
-  createCar = () => {
-    const body = {
-      car: this.state
-    }
-    return fetch("http://localhost:3001/api/v1/cars", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(body)
-    })
-      .then(r => r.json())
-      .then(newCar => {
-        if (newCar.error) {
-          alert(newCar.error)
-        } else {
-          // this.setState({
-          //   cars: this.state.cars.concat(newCar)
-          // })
-          this.props.addCar(newCar)
           this.props.history.push("/cars")
         }
-        return newCar
       })
   }
 
@@ -107,4 +81,4 @@ class NewCar extends Component {
 
 }
 
-export default connect(null, { addCar })(NewCar);
+export default connect(null, { createCar })(NewCar);

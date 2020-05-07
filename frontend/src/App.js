@@ -8,24 +8,15 @@ import ReviewsContainer from './containers/ReviewsContainer.js'
 import { Switch, Route } from 'react-router-dom'
 
 import { connect } from 'react-redux'
-import { loadCars } from './actions/cars.js'
+import { fetchCars } from './actions/cars.js'
+import { fetchDealerReviews } from './actions/reviews.js'
 
 class App extends React.Component {
 
   componentDidMount() {
-    this.getCars()
-  }
-
-  getCars = () => {
-    fetch("http://localhost:3001/api/v1/cars")
-      .then(resp => resp.json())
-      .then(carsJSON => {
-        if (carsJSON.error) {
-          alert(carsJSON.error)
-        } else {
-          this.props.loadCars(carsJSON)
-        }
-      })
+    // should dispatch an action, something like fetchCars?
+    this.props.fetchCars()
+    this.props.fetchDealerReviews()
   }
 
   // the render method should be a pure function of props and state
@@ -50,4 +41,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, { loadCars })(App);
+export default connect(null, { fetchCars, fetchDealerReviews })(App);

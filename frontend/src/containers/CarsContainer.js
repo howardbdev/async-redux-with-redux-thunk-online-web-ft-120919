@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
 const CarsContainer = ({ cars }) => {
-
     return (
       <div className="CarsContainer">
         <SideBar cars={cars} />
