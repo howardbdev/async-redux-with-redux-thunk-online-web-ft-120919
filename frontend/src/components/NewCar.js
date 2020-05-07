@@ -39,7 +39,7 @@ class NewCar extends Component {
   render() {
     return (
       <div className="NewCar">
-        <h4>New Review</h4>
+        <h4>New Car</h4>
         <form onSubmit={this.handleSubmit}>
           <input
             name="year"
