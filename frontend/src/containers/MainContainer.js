@@ -6,7 +6,6 @@ import NewReview from '../components/NewReview.js'
 
 class MainContainer extends React.Component {
   componentToRender = () => {
-    console.log("props", this.props)
     switch (this.props.currentView) {
       case "newCar":
         return <NewCar createCar={this.props.createCar}/>
