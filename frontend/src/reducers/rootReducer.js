@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 import cars from "./cars"
 import reviews from "./reviews"
 
