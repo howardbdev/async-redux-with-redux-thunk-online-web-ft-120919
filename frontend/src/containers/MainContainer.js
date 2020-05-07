@@ -3,30 +3,17 @@ import Car from '../components/Car.js'
 import SideBar from '../components/SideBar.js'
 import NewCar from '../components/NewCar.js'
 import NewReview from '../components/NewReview.js'
+import { Switch, Route } from 'react-router-dom'
 
-class MainContainer extends React.Component {
-  componentToRender = () => {
-    switch (this.props.currentView) {
-      case "newCar":
-        return <NewCar createCar={this.props.createCar}/>
-      case "newReview":
-        return <NewReview createReview={this.props.createReview}/>
-      default:
-        return <Car car={this.props.cars.find(car => car.id === this.props.carId)}/>
-    }
-  }
-  render() {
-    return (
+const MainContainer = ({cars, handleCarLinkClick, carId }) => (
       <div className="MainContainer">
         <SideBar
-          cars={this.props.cars}
-          handleCarLinkClick={this.props.handleCarLinkClick}
-          newCarClick={this.props.newCarClick}
+          cars={cars}
+          handleCarLinkClick={handleCarLinkClick}
         />
-        { this.componentToRender() }
+        <Car car={cars.find(car => car.id === carId)}/>
       </div>
     )
-  }
-}
+
 
 export default MainContainer
