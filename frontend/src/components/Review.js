@@ -11,7 +11,7 @@ const Review = ({ review }) => {
         return <span role="img" aria-label="Three Stars">⭐️⭐️⭐️</span>
       case 4:
         return <span role="img" aria-label="Four Stars">⭐️⭐️⭐️⭐️</span>
-      case 5:
+      default:
         return <span role="img" aria-label="Five Stars">⭐️⭐️⭐️⭐️⭐️</span>
     }
   }

@@ -20,7 +20,7 @@ code {
   flex-wrap: wrap;
 }
 
-.MainContainer, .NavBar {
+.CarsContainer, .NavBar {
   justify-content: center;
   align-items: center;
   display: flex;
@@ -55,7 +55,7 @@ code {
 a:hover {
   text-shadow: 1px 1px darkgray;
   cursor: pointer;
-  color: green;
+  color: lightgreen;
 }
 
 button, .NavBar > a {

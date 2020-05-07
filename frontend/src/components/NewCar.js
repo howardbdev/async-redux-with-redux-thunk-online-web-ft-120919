@@ -1,38 +1,62 @@
 import React, { Component } from 'react';
+import { addCar } from "../actions/cars.js"
+import { connect } from "react-redux"
+
+const initialState = {
+  year: "",
+  make: "",
+  model: "",
+  miles: "",
+  price: "",
+  used: true
+}
 
 class NewCar extends Component {
 
-  state = {
-    year: "",
-    make: "",
-    model: "",
-    miles: "",
-    price: "",
-    used: true
-  }
+  state = initialState
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value})
   }
 
   resetForm = () => {
-    this.setState({
-      year: "",
-      make: "",
-      model: "",
-      miles: "",
-      price: "",
-      used: true
-    })
+    this.setState(initialState)
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.createCar(this.state)
+    this.createCar()
       .then(response => {
         if (!response.error) {
           this.resetForm()
+        } 
+      })
+  }
+
+  createCar = () => {
+    const body = {
+      car: this.state
+    }
+    return fetch("http://localhost:3001/api/v1/cars", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(r => r.json())
+      .then(newCar => {
+        if (newCar.error) {
+          alert(newCar.error)
+        } else {
+          // this.setState({
+          //   cars: this.state.cars.concat(newCar)
+          // })
+          this.props.addCar(newCar)
+          this.props.history.push("/cars")
         }
+        return newCar
       })
   }
 
@@ -71,7 +95,7 @@ class NewCar extends Component {
             onChange={this.handleChange}
             value={this.state.price}
           /><br/>
-          <select name="used" value={this.state.used}>
+          <select name="used" value={this.state.used} onChange={this.handleChange}>
             <option value={true}>Used</option>
             <option value={false}>New</option>
           </select><br/>
@@ -83,4 +107,4 @@ class NewCar extends Component {
 
 }
 
-export default NewCar;
+export default connect(null, { addCar })(NewCar);

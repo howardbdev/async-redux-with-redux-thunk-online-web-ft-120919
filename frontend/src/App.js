@@ -1,21 +1,16 @@
 import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar.js'
-import Review from './components/Review.js'
-import SideBar from './components/SideBar.js'
 import NewCar from './components/NewCar.js'
-import MainContainer from './containers/MainContainer.js'
+import Home from './components/Home.js'
+import CarsContainer from './containers/CarsContainer.js'
 import ReviewsContainer from './containers/ReviewsContainer.js'
 import { Switch, Route } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+import { loadCars } from './actions/cars.js'
+
 class App extends React.Component {
-
-  state = {
-    cars: [],
-    currentCarId: 0,
-    currentView: "cars",
-  }
-
 
   componentDidMount() {
     this.getCars()
@@ -25,45 +20,13 @@ class App extends React.Component {
     fetch("http://localhost:3001/api/v1/cars")
       .then(resp => resp.json())
       .then(carsJSON => {
-        this.setState({
-          cars: carsJSON
-        })
-      })
-  }
-
-  handleCarLinkClick = (id) => this.setState({ currentCarId: id, currentView: "cars" })
-
-  newCarClick = (currentView) => {
-    this.setState({
-      currentView
-    })
-  }
-
-  createCar = (carData) => {
-    const body = {
-      car: carData
-    }
-    return fetch("http://localhost:3001/api/v1/cars", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(body)
-    })
-      .then(r => r.json())
-      .then(newCar => {
-        if (newCar.error) {
-          alert(newCar.error)
+        if (carsJSON.error) {
+          alert(carsJSON.error)
         } else {
-          this.setState({
-            cars: this.state.cars.concat(newCar)
-          })
+          this.props.loadCars(carsJSON)
         }
-        return newCar
       })
   }
-
 
   // the render method should be a pure function of props and state
   render() {
@@ -71,20 +34,13 @@ class App extends React.Component {
     return (
 
       <div className="App">
-        <h1>🚗 React Cars 🚙</h1>
+        <h1><span role="img" aria-label="red car">🚗</span> React Cars <span role="img" aria-label="blue car">🚙</span></h1>
         <NavBar />
         <Switch>
-          <Route exact path="/cars" render={(routerProps) =>(
-            <MainContainer
-             {...routerProps}
-             cars={this.state.cars}
-             carId={this.state.currentCarId}
-             handleCarLinkClick={this.handleCarLinkClick}
-             newCarClick={this.newCarClick}
-            />)
-          }/>
           <Route exact path="/cars/new" component={NewCar}/>
+          <Route path="/cars" component={CarsContainer}/>
           <Route exact path="/reviews" component={ReviewsContainer}/>
+          <Route path="/" component={Home}/>
         </Switch>
 
       </div>
@@ -94,4 +50,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { loadCars })(App);
