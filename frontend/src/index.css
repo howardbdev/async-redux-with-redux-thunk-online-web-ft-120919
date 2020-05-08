@@ -58,7 +58,7 @@ a:hover {
   color: lightgreen;
 }
 
-button, .NavBar > a {
+button, .NavBar > a, .edit-car-link {
   box-shadow: 1px 1px lightsteelblue;
   border-radius: 4px;
   border-color: navy;

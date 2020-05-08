@@ -19,6 +19,8 @@ export const loadCars = cars => ({ type: "LOAD_CARS", cars })
 
 export const addCar = car => ({ type: "ADD_CAR", car })
 
+export const updateCarSuccess = car => ({ type: "UPDATE_CAR_SUCCESS", car })
+
 // async action creators
 
 export const fetchCars = () => {
@@ -53,13 +55,34 @@ export const createCar = (car) => {
         if (newCar.error) {
           alert(newCar.error)
         } else {
-          // this.setState({
-          //   cars: this.state.cars.concat(newCar)
-          // })
           dispatch(addCar(newCar))
         }
         return newCar
       })
   }
+}
 
+export const updateCar = (car) => {
+  return dispatch => {
+    const body = {
+      car
+    }
+    return fetch(`http://localhost:3001/api/v1/cars/${car.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(r => r.json())
+      .then(newCar => {
+        if (newCar.error) {
+          alert(newCar.error)
+        } else {
+          dispatch(updateCarSuccess(newCar))
+        }
+        return newCar
+      })
+  }
 }

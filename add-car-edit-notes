@@ -1,0 +1,7 @@
+Overall, I want to be able to edit and update a car
+
+- I need a button to click on a particular car to show an edit form
+- I need to build an edit form
+- I need an edit route /cars/:id/edit
+- I need to build an update action creator
+- I need to add ^^ and update case in my reducer
