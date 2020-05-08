@@ -36,7 +36,7 @@ code {
   max-width: 500px;
 }
 
-.Car, .SideBar, .NewCar, .NewReview {
+.Car, .SideBar, .NewCar, .NewReview, .Review {
   margin: 4px;
   padding: 4px;
   border-radius: 3px;
@@ -77,6 +77,10 @@ button:hover {
   color: white;
   border-style: solid;
   background-color: navy
+}
+
+.StarRating:hover {
+  cursor: pointer;
 }
 
 input, textarea {

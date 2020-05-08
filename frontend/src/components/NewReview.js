@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { createReview } from '../actions/reviews.js'
+import StarRating from './StarRating'
 
 class NewReview extends Component {
 
   state = {
-    rating: "5",
+    rating: 0,
     content: ""
   }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value})
+  }
+
+  handleStarClick = (rating) => {
+    this.setState({ rating })
   }
 
   handleSubmit = (e) => {
@@ -21,7 +26,7 @@ class NewReview extends Component {
 
   resetForm = () => {
     this.setState({
-      rating: "5",
+      rating: 0,
       content: ""
     })
   }
@@ -30,14 +35,8 @@ class NewReview extends Component {
     return (
       <div className="NewReview">
         <h4>New Review</h4>
+        <StarRating handleStarClick={this.handleStarClick} rating={this.state.rating}/>
         <form onSubmit={this.handleSubmit}>
-          <select name="rating" onChange={this.handleChange} value={this.state.rating}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select><br/>
           <textarea
             onChange={this.handleChange}
             placeholder="Review Content"
@@ -46,6 +45,8 @@ class NewReview extends Component {
           /><br/>
           <input type="submit" value="Add Review"/>
         </form>
+        <div>
+        </div>
       </div>
     );
   }
