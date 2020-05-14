@@ -5,10 +5,11 @@ import ChooseCarPrompt from '../components/ChooseCarPrompt.js'
 import SideBar from '../components/SideBar.js'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
 
 const CarsContainer = ({ cars }) => {
     return (
-      <div className="CarsContainer">
+      <Container className="CarsContainer d-flex flex-row justify-content-between">
         <SideBar cars={cars} />
         <Switch>
           <Route exact path="/cars" component={ ChooseCarPrompt }/>
@@ -22,7 +23,7 @@ const CarsContainer = ({ cars }) => {
           }}/>
         </Switch>
 
-      </div>
+      </Container>
     )
 }
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { createCar } from "../actions/cars.js"
 import { connect } from "react-redux"
+import Form from "react-bootstrap/Form"
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup"
+import ToggleButton from "react-bootstrap/ToggleButton"
 
 const initialState = {
   year: "",
@@ -18,6 +21,10 @@ class NewCar extends Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value})
   }
+
+  handleUsedToggle = val => this.setState({
+    used: val
+  })
 
   resetForm = () => {
     this.setState(initialState)
@@ -38,43 +45,72 @@ class NewCar extends Component {
     return (
       <div className="NewCar">
         <h4>New Car</h4>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name="year"
-            placeholder="year"
-            onChange={this.handleChange}
-            value={this.state.year}
-          /><br/>
-          <input
-            name="make"
-            placeholder="make"
-            onChange={this.handleChange}
-            value={this.state.make}
-          /><br/>
-          <input
-            name="model"
-            placeholder="model"
-            onChange={this.handleChange}
-            value={this.state.model}
-          /><br/>
-          <input
-            name="miles"
-            placeholder="miles"
-            onChange={this.handleChange}
-            value={this.state.miles}
-          /><br/>
-          <input
-            name="price"
-            placeholder="price"
-            onChange={this.handleChange}
-            value={this.state.price}
-          /><br/>
-          <select name="used" value={this.state.used} onChange={this.handleChange}>
-            <option value={true}>Used</option>
-            <option value={false}>New</option>
-          </select><br/>
-          <input type="submit" value="Add Car"/>
-        </form>
+        <Form>
+          <Form.Group>
+            <Form.Control
+              name="year"
+              onChange={this.handleChange}
+              type="year"
+              placeholder="year"
+              value={this.state.year}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              name="make"
+              onChange={this.handleChange}
+              type="make"
+              placeholder="make"
+              value={this.state.make}
+            />
+          </Form.Group>
+          <Form.Group>
+              <Form.Control
+              name="model"
+              onChange={this.handleChange}
+              type="model"
+              placeholder="model"
+              value={this.state.model}
+            />
+          </Form.Group>
+          <Form.Group>
+              <Form.Control
+              name="miles"
+              onChange={this.handleChange}
+              type="miles"
+              placeholder="miles"
+              value={this.state.miles}
+            />
+          </Form.Group>
+          <Form.Group>
+              <Form.Control
+              name="price"
+              onChange={this.handleChange}
+              type="price"
+              placeholder="price"
+              value={this.state.price}
+            />
+          </Form.Group>
+          <ToggleButtonGroup
+            type="radio"
+            name="used"
+            value={this.state.used}
+            onChange={this.handleUsedToggle}
+          >
+            <ToggleButton
+              variant="outline-light"
+              value={true}
+            >
+              Used
+            </ToggleButton>
+            <ToggleButton
+              variant="outline-light"
+              value={false}
+            >
+              New
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Form>
       </div>
     );
   }

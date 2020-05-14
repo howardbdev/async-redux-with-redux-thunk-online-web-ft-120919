@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar.js'
@@ -11,6 +12,9 @@ import { connect } from 'react-redux'
 import { fetchCars } from './actions/cars.js'
 import { fetchDealerReviews } from './actions/reviews.js'
 
+import Container from 'react-bootstrap/Container'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+
 class App extends React.Component {
 
   componentDidMount() {
@@ -23,18 +27,21 @@ class App extends React.Component {
   render() {
 
     return (
+      <Container className="p-3">
+        <Jumbotron>
+          <div className="App">
+            <h1><span role="img" aria-label="red car">🚗</span> React Cars <span role="img" aria-label="blue car">🚙</span></h1>
+            <NavBar />
+            <Switch>
+              <Route exact path="/cars/new" component={NewCar}/>
+              <Route path="/cars" component={CarsContainer}/>
+              <Route exact path="/reviews" component={ReviewsContainer}/>
+              <Route path="/" component={Home}/>
+            </Switch>
 
-      <div className="App">
-        <h1><span role="img" aria-label="red car">🚗</span> React Cars <span role="img" aria-label="blue car">🚙</span></h1>
-        <NavBar />
-        <Switch>
-          <Route exact path="/cars/new" component={NewCar}/>
-          <Route path="/cars" component={CarsContainer}/>
-          <Route exact path="/reviews" component={ReviewsContainer}/>
-          <Route path="/" component={Home}/>
-        </Switch>
-
-      </div>
+          </div>
+        </Jumbotron>
+      </Container>
 
     );
 
